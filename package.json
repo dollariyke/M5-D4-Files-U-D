@@ -1,7 +1,7 @@
 {
   "name": "strive-b3-m5-d3-middlewares-",
   "version": "1.0.0",
-  "description": "",
+  "description": "strive-b3-m5-d3-middlewares-",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -29,6 +29,6 @@
   },
   "devDependencies": {
     "dotenv": "^8.2.0",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.6"
   }
 }
