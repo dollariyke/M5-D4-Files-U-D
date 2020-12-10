@@ -11,8 +11,10 @@ const upload = multer({})
 
 const studentsFolderPath = join(__dirname, "../../../public/img/students")
 
+// upload one file
 router.post("/upload", upload.single("avatar"), async (req, res, next) => {
   try {
+    // write the file on the disc
     await writeFile(
       join(studentsFolderPath, req.file.originalname),
       req.file.buffer
@@ -24,11 +26,13 @@ router.post("/upload", upload.single("avatar"), async (req, res, next) => {
   }
 })
 
+// upload multiple file
 router.post(
   "/uploadMultiple",
-  upload.array("multipleAvatar", 2),
+  upload.array("multipleAvatar", 2),// the number limits the file to process
   async (req, res, next) => {
     try {
+      // write the multiple file on the disc
       const arrayOfPromises = req.files.map(file =>
         writeFile(join(studentsFolderPath, file.originalname), file.buffer)
       )
