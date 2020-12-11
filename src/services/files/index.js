@@ -2,7 +2,7 @@ const express = require("express")
 const multer = require("multer")
 const { writeFile, createReadStream } = require("fs-extra")
 const { pipeline } = require("stream")
-const zlib = require("zlib")
+const zlib = require("zlib")/* this is used for zipping the file to be sent*/
 const { join } = require("path")
 
 const router = express.Router()
@@ -46,14 +46,16 @@ router.post(
 )
 
 router.get("/:name/download", (req, res, next) => {
+  // start reading stream from the path on the disc. path concatenated with the request name
   const source = createReadStream(
     join(studentsFolderPath, `${req.params.name}`)
   )
   res.setHeader(
     "Content-Disposition",
     `attachment; filename=${req.params.name}.gz`
+    // this ask the browser to prompt out the save on disc window
   )
-  pipeline(source, zlib.createGzip(), res, error => next(error))
+  pipeline(source, zlib.createGzip() ,res, error => next(error))
 })
 
 module.exports = router
